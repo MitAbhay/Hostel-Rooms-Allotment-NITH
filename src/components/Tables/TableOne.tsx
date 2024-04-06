@@ -1,5 +1,6 @@
 import { BRAND } from "@/types/brand";
 import Image from "next/image";
+import Link from "next/link";
 
 const brandData: BRAND[] = [
   {
@@ -48,41 +49,46 @@ const TableOne = () => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-        Top Channels
+        Student Details
       </h4>
 
       <div className="flex flex-col">
-        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-6">
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Source
+              Name
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Visitors
+              Roll Number
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Revenues
+              Selected Room
             </h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Sales
+              Check fee Slip
             </h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Conversion
+              Remarks
+            </h5>
+          </div>
+          <div className="hidden p-2.5 text-center sm:block xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Verify
             </h5>
           </div>
         </div>
 
         {brandData.map((brand, key) => (
           <div
-            className={`grid grid-cols-3 sm:grid-cols-5 ${
+            className={`grid grid-cols-3 sm:grid-cols-6 ${
               key === brandData.length - 1
                 ? ""
                 : "border-b border-stroke dark:border-strokedark"
@@ -90,28 +96,45 @@ const TableOne = () => {
             key={key}
           >
             <div className="flex items-center gap-3 p-2.5 xl:p-5">
-              <div className="flex-shrink-0">
+              {/* <div className="flex-shrink-0">
                 <Image src={brand.logo} alt="Brand" width={48} height={48} />
-              </div>
+              </div> */}
               <p className="hidden text-black dark:text-white sm:block">
-                {brand.name}
+                Abhay
               </p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">{brand.visitors}K</p>
+              <p className="text-black dark:text-white">20bcs013K</p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-3">${brand.revenues}</p>
+              <p className="text-meta-3">449</p>
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">{brand.sales}</p>
+              <p className="text-black dark:text-white">abhay.pdf</p>
+            </div>
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <input
+                placeholder="Enter your remark"
+                className="w-full rounded-lg border border-stroke bg-transparent p-2 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              />
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-meta-5">{brand.conversion}%</p>
+              <Link
+                href="#"
+                className="inline-flex items-center justify-center rounded-full bg-meta-3 px-2 py-2 text-center font-normal text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              >
+                Yes
+              </Link>
+              <Link
+                href="#"
+                className="inline-flex items-center justify-center rounded-full bg-red px-2 py-2 text-center font-normal text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              >
+                No
+              </Link>
             </div>
           </div>
         ))}

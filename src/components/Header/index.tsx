@@ -78,7 +78,9 @@ const Header = (props: {
             <div className="my-2 text-[30px] font-bold">
               राष्ट्रीय प्रौद्योगिकी संस्थान हमीरपुर
             </div>
-            <div className="my-2 text-[20px] font-bold">(राष्ट्रीय)</div>
+            <div className="my-2 text-[20px] font-bold">
+              (एक राष्ट्रीय महत्व का संस्थान)
+            </div>
             <div className="my-2 text-[30px] font-bold">
               National Institute of Technology Hamirpur
             </div>
