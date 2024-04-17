@@ -149,7 +149,7 @@ const SignIn: React.FC = () => {
 
                 {/* <div className="mb-5"> */}
                 <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-                  <Link href="/profile">Sign In</Link>
+                  <Link href="/hostelmap">Sign In</Link>
                 </div>
 
                 {/* </div> */}

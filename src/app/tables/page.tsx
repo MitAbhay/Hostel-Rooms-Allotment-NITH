@@ -23,7 +23,8 @@ const TablesPage = () => {
         <div className="space-y-3">
           <div className=" flex gap-5">
             <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
+              <div>201</div>
+              <div>Filled 1/3</div>
             </div>
             <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
               201
