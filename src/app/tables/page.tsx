@@ -5,6 +5,8 @@ import TableTwo from "@/components/Tables/TableTwo";
 
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import Rooms from "@/data.json";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Next.js Tables | TailAdmin - Next.js Dashboard Template",
@@ -20,110 +22,18 @@ const TablesPage = () => {
         <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
           BLOCK A
         </h4>
-        <div className="space-y-3">
-          <div className=" flex gap-5">
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              <div>201</div>
-              <div>Filled 1/3</div>
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-          </div>
-          <div className=" flex gap-5">
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-          </div>{" "}
-          <div className=" flex gap-5">
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-          </div>{" "}
-          <div className=" flex gap-5">
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-          </div>{" "}
-          <div className=" flex gap-5">
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-          </div>{" "}
-          <div className=" flex gap-5">
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-            <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-              201
-            </div>
-          </div>{" "}
+        <div className="m-6 grid grid-cols-4 gap-8">
+          {Rooms.rooms.map((room) => (
+            <Link
+              key={room.room_number}
+              href={`/roomdetails/${room.room_number}`}
+            >
+              <div className="flex w-full cursor-pointer flex-col rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
+                <span>Room Number: {room.room_number}</span>
+                <span>Remaining Seats: {room.vacant_seats}</span>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </DefaultLayout>

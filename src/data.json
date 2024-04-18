@@ -1,0 +1,308 @@
+{
+  "rooms": [
+    {
+      "room_number": "101",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 3,
+      "total_seats": 4
+    },
+    {
+      "room_number": "102",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 2,
+      "total_seats": 4
+    },
+    {
+      "room_number": "103",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 1,
+      "total_seats": 4
+    },
+    {
+      "room_number": "104",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 4,
+      "total_seats": 4
+    },
+    {
+      "room_number": "105",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 3,
+      "total_seats": 4
+    },
+    {
+      "room_number": "106",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 2,
+      "total_seats": 4
+    },
+    {
+      "room_number": "107",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 4,
+      "total_seats": 4
+    },
+    {
+      "room_number": "108",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 2,
+      "total_seats": 4
+    },
+    {
+      "room_number": "109",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 0,
+      "total_seats": 4
+    },
+    {
+      "room_number": "201",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 1,
+      "total_seats": 4
+    },
+    {
+      "room_number": "202",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 2,
+      "total_seats": 4
+    },
+    {
+      "room_number": "203",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 2,
+      "total_seats": 4
+    },
+    {
+      "room_number": "204",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 2,
+      "total_seats": 4
+    },
+    {
+      "room_number": "205",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 2,
+      "total_seats": 4
+    },
+    {
+      "room_number": "206",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 2,
+      "total_seats": 4
+    },
+    {
+      "room_number": "207",
+      "students": [
+        {
+          "student_id": "S001",
+          "name": "John Doe",
+          "age": 20,
+          "gender": "Male"
+        },
+        {
+          "student_id": "S002",
+          "name": "Jane Smith",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "vacant_seats": 2,
+      "total_seats": 4
+    }
+  ]
+}
