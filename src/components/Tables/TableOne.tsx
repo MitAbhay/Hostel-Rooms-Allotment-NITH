@@ -1,143 +1,121 @@
+"use client";
 import { BRAND } from "@/types/brand";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { BASE_URL } from "../../baseUrl.js";
+import { useRouter } from "next/navigation";
+import { getUser } from "../../localStorage.js";
 
-const brandData: BRAND[] = [
-  {
-    logo: "/images/brand/brand-01.svg",
-    name: "Google",
-    visitors: 3.5,
-    revenues: "5,768",
-    sales: 590,
-    conversion: 4.8,
-  },
-  {
-    logo: "/images/brand/brand-02.svg",
-    name: "Twitter",
-    visitors: 2.2,
-    revenues: "4,635",
-    sales: 467,
-    conversion: 4.3,
-  },
-  {
-    logo: "/images/brand/brand-03.svg",
-    name: "Github",
-    visitors: 2.1,
-    revenues: "4,290",
-    sales: 420,
-    conversion: 3.7,
-  },
-  {
-    logo: "/images/brand/brand-04.svg",
-    name: "Vimeo",
-    visitors: 1.5,
-    revenues: "3,580",
-    sales: 389,
-    conversion: 2.5,
-  },
-  {
-    logo: "/images/brand/brand-05.svg",
-    name: "Facebook",
-    visitors: 3.5,
-    revenues: "6,768",
-    sales: 390,
-    conversion: 4.2,
-  },
-];
+const axios = require("axios");
 
 const TableOne = () => {
+  const [allStudents, setAllStudents] = useState([]);
+  const [remarks, setRemarks] = useState("");
+  const router = useRouter();
+  const user = getUser();
+  if (user?.role !== "admin") {
+    router.push("/");
+  }
+  const fetchStudentsData = () => {
+    axios
+      .get(`${BASE_URL}/users/get_all_students/${user?.gender}`)
+      .then((res: any) => {
+        setAllStudents(res?.data?.users);
+      })
+      .catch((error: any) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+  const verifyUser = (id: string, value: boolean) => {
+    axios
+      .put(`${BASE_URL}/users/verify/${id}`, {
+        isVerified: value,
+        status: value ? "verified" : "declined",
+        remarks,
+      })
+      .then((res: any) => {
+        fetchStudentsData();
+      })
+      .catch((error: any) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+  useEffect(() => {
+    fetchStudentsData();
+  }, []);
+  console.log(allStudents);
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
         Student Details
       </h4>
 
-      <div className="flex flex-col">
-        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-6">
-          <div className="p-2.5 xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Name
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Roll Number
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Selected Room
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Check fee Slip
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Remarks
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Verify
-            </h5>
-          </div>
-        </div>
+      <div className="overflow-x-auto">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>Serial</th>
+              <th>Name</th>
+              <th>Registration Number</th>
+              <th>Room Number</th>
+              <th>Gender</th>
+              <th>Fee Receipt</th>
+              <th>Verified</th>
+              <th>Remarks</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allStudents.map((st: any, index) => (
+              <tr key={index}>
+                <th>{index + 1}</th>
+                <td>{st?.userName}</td>
+                <td>{st?.registrationNumber}</td>
+                <td>{st?.roomNumber}</td>
+                <td>{st?.gender}</td>
+                <td>
+                  <a
+                  style={{textDecoration: "underline"}}
+                  id="download_image"
+                    href={`http://localhost:8000${st?.feeReceipt}`}
+                    download
+                  >View Fee Script</a>
+                </td>
+                <td>{(st?.isVerified).toString()}</td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Remarks"
+                    className="input input-bordered w-30"
+                    onChange={(e) => setRemarks(e.target.value)}
+                    disabled={index>0}
+                  />
+                </td>
+                <td>
+                  <>
+                    <button
+                      className="btn btn-outline btn-success"
+                      onClick={() => verifyUser(st?.email, true)}
+                      disabled={index>0}
+                    >
+                      Verify
+                    </button>
 
-        {brandData.map((brand, key) => (
-          <div
-            className={`grid grid-cols-3 sm:grid-cols-6 ${
-              key === brandData.length - 1
-                ? ""
-                : "border-b border-stroke dark:border-strokedark"
-            }`}
-            key={key}
-          >
-            <div className="flex items-center gap-3 p-2.5 xl:p-5">
-              {/* <div className="flex-shrink-0">
-                <Image src={brand.logo} alt="Brand" width={48} height={48} />
-              </div> */}
-              <p className="hidden text-black dark:text-white sm:block">
-                Abhay
-              </p>
-            </div>
-
-            <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">20bcs013K</p>
-            </div>
-
-            <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-3">449</p>
-            </div>
-
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">abhay.pdf</p>
-            </div>
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <input
-                placeholder="Enter your remark"
-                className="w-full rounded-lg border border-stroke bg-transparent p-2 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-              />
-            </div>
-
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <Link
-                href="#"
-                className="inline-flex items-center justify-center rounded-full bg-meta-3 px-2 py-2 text-center font-normal text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
-              >
-                Yes
-              </Link>
-              <Link
-                href="#"
-                className="inline-flex items-center justify-center rounded-full bg-red px-2 py-2 text-center font-normal text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
-              >
-                No
-              </Link>
-            </div>
-          </div>
-        ))}
+                    <button
+                      className="btn btn-outline btn-error ms-2"
+                      onClick={() => verifyUser(st?.email, false)}
+                      disabled={index>0}
+                    >
+                      Decline
+                    </button>
+                  </>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

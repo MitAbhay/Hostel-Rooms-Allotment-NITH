@@ -407,9 +407,9 @@ const SidebarAdmin = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Tables --> */}
               <li>
                 <Link
-                  href="/tables"
+                  href="/rooms"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
+                    pathname.includes("rooms") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
                   <svg
@@ -446,9 +446,9 @@ const SidebarAdmin = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
               <li>
                 <Link
-                  href="/addstudent"
+                  href="/addstudentadmin"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes("settings") &&
+                    pathname.includes("addstudentadmin") &&
                     "bg-graydark dark:bg-meta-4"
                   }`}
                 >
@@ -522,7 +522,7 @@ const SidebarAdmin = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       </clipPath>
                     </defs>
                   </svg>
-                  Change/Swap Room
+                  Swap Room
                 </Link>
               </li>
               <li>

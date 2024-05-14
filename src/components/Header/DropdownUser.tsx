@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {getUser} from "../../localStorage"
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const user = getUser();
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
@@ -57,7 +59,7 @@ const DropdownUser = () => {
       </span>
 
       <span className="mt-4 hidden text-center lg:block">
-        <span className="block text-sm font-medium text-white">20BCS013</span>
+        <span className="block text-sm font-medium text-white">{user?.userName} - {user?.role}</span>
         {/* <span className="block text-xs">UX Designer</span> */}
       </span>
 
