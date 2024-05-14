@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import TableOne from "@/components/Tables/TableOne";
 import TableThree from "@/components/Tables/TableThree";
@@ -8,12 +8,10 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import DefaultLayoutAdmin from "@/components/Layouts/DefaultLayoutAdmin";
 import Link from "next/link";
 import axios from "axios";
-import {BASE_URL} from "../../baseUrl.js";
+import { BASE_URL } from "../../baseUrl.js";
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation'
-import {getUser} from "../../localStorage.js"
-
-
+import { useRouter } from "next/navigation";
+import { getUser } from "../../localStorage.js";
 
 const TablesPage = () => {
   const [allRoomsData, setAllRoomsData] = useState([]);
@@ -21,13 +19,12 @@ const TablesPage = () => {
   const router = useRouter();
   const user = getUser();
   const whom = user?.gender === "male" ? "boys" : "girls";
-  if(user?.role !== "admin") {
+  if (user?.role !== "admin") {
     router.push("/");
   }
-  const fetchRoomData = ()=> {
+  const fetchRoomData = () => {
     axios
-      .get(`${BASE_URL}/rooms/get_all_rooms/${block}/none`
-      )
+      .get(`${BASE_URL}/rooms/get_all_rooms/${block}/${whom}`)
       .then((res: any) => {
         console.log(res?.data);
         setAllRoomsData(res?.data?.rooms);
@@ -35,24 +32,27 @@ const TablesPage = () => {
       .catch((error: any) => {
         console.error("Error fetching data:", error);
       });
-  }
-  useEffect(()=> {
+  };
+  useEffect(() => {
     fetchRoomData();
-  }, [block])
+  }, [block]);
 
   return (
     <DefaultLayoutAdmin>
       <Breadcrumb pageName="rooms" />
       <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-        <select onChange={(e)=> setBlock(e.target.value)} className="select select-bordered w-full max-w-xs">
-          <option value={"A"}>Block A</option>
-          <option value={"B"}>Block B</option>
-          <option value={"C"}>Block C</option>
-        </select>
+          <select
+            onChange={(e) => setBlock(e.target.value)}
+            className="select select-bordered w-full max-w-xs"
+          >
+            <option value={"A"}>Block A</option>
+            <option value={"B"}>Block B</option>
+            <option value={"C"}>Block C</option>
+          </select>
         </h4>
         <div className="m-6 grid grid-cols-4 gap-8">
-          {allRoomsData.map((room:any) => (
+          {allRoomsData.map((room: any) => (
             <Link
               key={room?.roomNumber}
               href={`/roomDetailsAdmin/${room?.roomNumber}`}
