@@ -1,36 +1,35 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { useRouter } from 'next/navigation'
-import {setItem} from "../../../../localStorage"
+import { useRouter } from "next/navigation";
+import { setItem } from "../../../../localStorage";
 import axios from "axios";
-import {BASE_URL} from "../../../../baseUrl"
+import { BASE_URL } from "../../../../baseUrl";
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter()
-  const userLogin = (e:any)=> {
-    e?.preventDefault()
+  const router = useRouter();
+  const userLogin = (e: any) => {
+    e?.preventDefault();
     axios
-      .post(`${BASE_URL}/users/login`, 
-      {
-        email, password
-      }
-      )
+      .post(`${BASE_URL}/users/login`, {
+        email,
+        password,
+      })
       .then((res: any) => {
         console.log(res?.data);
         setItem(res?.data?.data, res?.data?.token);
-        router.push("/addstudentadmin");
+        router.push("/verifystudent");
       })
       .catch((error: any) => {
         console.error("Error fetching data:", error);
       });
-  }
+  };
   return (
     <div>
       {/* <Breadcrumb pageName="Sign In" /> */}
@@ -107,7 +106,7 @@ const SignIn: React.FC = () => {
                       type="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                      onChange={(e)=> setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
 
                     <span className="absolute right-4 top-4">
@@ -139,7 +138,7 @@ const SignIn: React.FC = () => {
                       type="password"
                       placeholder="6+ Characters, 1 Capital letter"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                      onChange={(e)=> setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
 
                     <span className="absolute right-4 top-4">
@@ -171,7 +170,7 @@ const SignIn: React.FC = () => {
 
                 {/* <div className="mb-5"> */}
                 <div className=" w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-center text-white transition hover:bg-opacity-90">
-                  <button onClick={(e)=> userLogin(e)}>Sign In</button>
+                  <button onClick={(e) => userLogin(e)}>Sign In</button>
                 </div>
 
                 {/* </div> */}

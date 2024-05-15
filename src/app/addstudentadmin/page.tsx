@@ -1,85 +1,100 @@
-"use client"
+"use client";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import Image from "next/image";
 import DefaultLayoutAdmin from "@/components/Layouts/DefaultLayoutAdmin";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {BASE_URL} from "../../baseUrl.js";
-import {getUser} from "../../localStorage"
-import { useRouter } from 'next/navigation'
+import { BASE_URL } from "../../baseUrl.js";
+import { getUser } from "../../localStorage";
+import { useRouter } from "next/navigation";
 
 const Settings = () => {
   const user = getUser();
-  const router = useRouter()
-  if(user?.role!=="admin")
-    {
-      router.push("/");
-    }
+  const router = useRouter();
+  if (user?.role !== "admin") {
+    router.push("/");
+  }
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
+  const [block, setBlock] = useState("");
   const [feeAmount, setFeeAmount] = useState(0);
+  const [size, setSize] = useState(5);
+  const [slots, setSlots] = useState(2);
+  const [roomType, setRoomType] = useState("boys");
   const [feeSbiRef, setFeeSbiRef] = useState("");
   const [feeReceipt, setFeeReceipt] = useState("");
-  const [registrationNumber, setRegistrationNumber] = useState("");
-  const handleFileInputChange = (e:any) => {
+  const [roomNumber, setroomNumber] = useState(0);
+  const handleFileInputChange = (e: any) => {
     const file = e?.target?.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e:any) => {
+      reader.onload = (e: any) => {
         const content = e.target.result;
         setFeeReceipt(content);
       };
       reader.readAsDataURL(file);
     } else {
-      setFeeReceipt('');
+      setFeeReceipt("");
     }
   };
-  const updateUserData = (e:any)=> {
-    e?.preventDefault()
+  const updateUserData = (e: any) => {
+    e?.preventDefault();
     console.log({
-      fullName, phoneNumber, address
-      , feeAmount, feeSbiRef, feeReceipt, registrationNumber
+      fullName,
+      phoneNumber,
+      block,
+      feeAmount,
+      feeSbiRef,
+      feeReceipt,
+      roomNumber,
     });
     axios
       .put(`${BASE_URL}/users/${selectedStudent?.email}`, {
-        fullName, phoneNumber, address
-        , feeAmount, feeSbiRef, feeReceipt, registrationNumber
-      }
-      )
+        fullName,
+        phoneNumber,
+        block,
+        feeAmount,
+        feeSbiRef,
+        feeReceipt,
+        roomNumber,
+        size,
+        slots,
+        roomType,
+      })
       .then((res: any) => {
         console.log(res?.data);
-        router.push("verifystudent")
+        router.push("verifystudent");
       })
       .catch((error: any) => {
         console.error("Error fetching data:", error);
       });
-  }
+  };
   const [allStudent, setAllStudent] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState<any>(null);
-  const getAllStudents = ()=> {
+  const getAllStudents = () => {
     axios
-    .get(`${BASE_URL}/users/get_all_normal_students`
-    )
-    .then((res: any) => {
-      setAllStudent(res?.data?.users);
-      console.log(res?.data);
-    })
-    .catch((error: any) => {
-      console.error("Error fetching data:", error);
-    });
-  }
-  useEffect(()=> {
+      .get(`${BASE_URL}/users/get_all_normal_students`)
+      .then((res: any) => {
+        setAllStudent(res?.data?.users);
+        console.log(res?.data);
+      })
+      .catch((error: any) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+  useEffect(() => {
     getAllStudents();
-  },[])
-  const handleSelectChange = (e:any) => {
+  }, []);
+  const handleSelectChange = (e: any) => {
     const selectedUserName = e.target.value;
-    const selectedStudent = allStudent.find((student:any) => student.userName === selectedUserName);
+    const selectedStudent = allStudent.find(
+      (student: any) => student.userName === selectedUserName,
+    );
     setSelectedStudent(selectedStudent);
   };
   return (
     <DefaultLayoutAdmin>
-        <div className="mx-auto max-w-270">
+      <div className="mx-auto max-w-270">
         <Breadcrumb pageName="Personal Information" />
 
         <div className="">
@@ -93,7 +108,7 @@ const Settings = () => {
               <div className="p-7">
                 <form>
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
-                  <div className="w-full sm:w-1/2">
+                    <div className="w-full sm:w-1/2">
                       <label
                         className="mb-3 block text-sm font-medium text-black dark:text-white"
                         htmlFor="userName"
@@ -101,14 +116,18 @@ const Settings = () => {
                         Username
                       </label>
                       <div className="relative">
-                        
-                        <select className="select select-bordered w-full max-w-xs" onChange={(e) => handleSelectChange(e)}>
-                        <option disabled selected>Select username</option>
-                          {
-                            allStudent.map((st:any)=> (
-                              <option key={st?._id} value={st?.userName}>{st?.userName}</option>
-                            ))
-                          }
+                        <select
+                          className="select select-bordered w-full max-w-xs"
+                          onChange={(e) => handleSelectChange(e)}
+                        >
+                          <option disabled selected>
+                            Select username
+                          </option>
+                          {allStudent.map((st: any) => (
+                            <option key={st?._id} value={st?.userName}>
+                              {st?.userName}
+                            </option>
+                          ))}
                         </select>
                       </div>
                     </div>
@@ -151,11 +170,10 @@ const Settings = () => {
                           name="fullName"
                           id="fullName"
                           placeholder="Enter fullname"
-                          onChange={(e)=> setFullName(e.target.value)}
+                          onChange={(e) => setFullName(e.target.value)}
                         />
                       </div>
                     </div>
-                    
 
                     <div className="w-full sm:w-1/2">
                       <label
@@ -170,7 +188,7 @@ const Settings = () => {
                         name="phoneNumber"
                         id="phoneNumber"
                         placeholder="Enter phone number"
-                        onChange={(e)=> setPhoneNumber(e.target.value)}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                       />
                     </div>
                   </div>
@@ -214,7 +232,6 @@ const Settings = () => {
                         name="emailAddress"
                         id="emailAddress"
                         value={selectedStudent?.email}
-                        disabled
                       />
                     </div>
                   </div>
@@ -224,15 +241,15 @@ const Settings = () => {
                       className="mb-3 block text-sm font-medium text-black dark:text-white"
                       htmlFor="Username"
                     >
-                      Address
+                      Block Number
                     </label>
                     <input
                       className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                       type="text"
                       name="Username"
                       id="Username"
-                      placeholder="Enter address"
-                      onChange={(e)=> setAddress(e.target.value)}
+                      placeholder="Enter Block Number"
+                      onChange={(e) => setBlock(e.target.value)}
                     />
                   </div>
 
@@ -241,15 +258,15 @@ const Settings = () => {
                       className="mb-3 block text-sm font-medium text-black dark:text-white"
                       htmlFor="Username"
                     >
-                      Registration Number
+                      Room Number
                     </label>
                     <input
                       className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                       type="text"
                       name="Username"
                       id="Username"
-                      placeholder="Enter registration number"
-                      onChange={(e) => setRegistrationNumber(e.target.value)}
+                      placeholder="Enter Room Number"
+                      onChange={(e) => setroomNumber(parseInt(e.target.value))}
                     />
                   </div>
                   {/* 
@@ -277,7 +294,9 @@ const Settings = () => {
                                 name="fullName"
                                 id="fullName"
                                 placeholder="Enter fee amount"
-                                onChange={(e)=> setFeeAmount(parseInt(e.target.value))}
+                                onChange={(e) =>
+                                  setFeeAmount(parseInt(e.target.value))
+                                }
                               />
                             </div>
                           </div>
@@ -295,7 +314,7 @@ const Settings = () => {
                               name="phoneNumber"
                               id="phoneNumber"
                               placeholder="Enter SBI number"
-                              onChange={(e)=> setFeeSbiRef(e.target.value)}
+                              onChange={(e) => setFeeSbiRef(e.target.value)}
                             />
                           </div>
                         </div>
@@ -313,7 +332,7 @@ const Settings = () => {
                           type="file"
                           accept="image/*"
                           className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
-                          onChange={(e)=> handleFileInputChange(e)}
+                          onChange={(e) => handleFileInputChange(e)}
                         />
                         <div className="flex flex-col items-center justify-center space-y-3">
                           <span className="flex h-10 w-10 items-center justify-center rounded-full border border-stroke bg-white dark:border-strokedark dark:bg-boxdark">
@@ -359,15 +378,12 @@ const Settings = () => {
                   {/* </div> */}
 
                   <div className="flex justify-end gap-4.5">
-                    <button
-                      className="flex justify-center rounded border border-stroke px-6 py-2 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
-                    >
+                    <button className="flex justify-center rounded border border-stroke px-6 py-2 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white">
                       Cancel
                     </button>
                     <button
                       className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-90"
-                      
-                      onClick={(e)=> updateUserData(e)}
+                      onClick={(e) => updateUserData(e)}
                     >
                       Submit
                     </button>
